@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct{
+    int data;
+    struct Node* next;
+}Node;
+
+
+Node* createNode(int value) {
+     Node* newNode = ( Node*)malloc(sizeof( Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a new Node at the beginning of the linked list
+Node* insertAtBeginning( Node* head, int value) {
+     Node* newNode = createNode(value);
+    newNode->next = head;
+    return newNode;
+}
+
+
+void printList( Node* head) {
+     Node* current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+
+void freeList( Node* head) {
+     Node* current = head;
+     Node* next;
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+}
+
+int main() {
+     Node* head = NULL;
+
+
+    head = insertAtBeginning(head, 3);
+    head = insertAtBeginning(head, 2);
+    head = insertAtBeginning(head, 1);
+
+
+    printf("Linked List: ");
+    printList(head);
+
+
+    freeList(head);
+
+    return 0;
+}
