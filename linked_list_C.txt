@@ -19,7 +19,7 @@ Node* createNode(int value) {
     return newNode;
 }
 
-// Function to insert a new Node at the beginning of the linked list
+
 Node* insertAtBeginning( Node* head, int value) {
      Node* newNode = createNode(value);
     newNode->next = head;
