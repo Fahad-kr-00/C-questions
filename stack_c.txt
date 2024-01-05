@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+
+typedef struct 
+{
+  int *p;
+  int size;
+  int capacity;
+}Stack;
+
+Stack* create_stack(int capacity)
+{
+  
+  Stack *stack=malloc(sizeof(stack));
+  if(!stack)
+  {
+    return NULL;
+  }
+  stack->p=malloc(sizeof(int)*capacity);
+  if(!stack->p)
+  {
+    return NULL;
+  }
+  stack->size=0;
+  stack->capacity=capacity;
+  return stack;
+}
+
+bool isfull(Stack *stack)
+{
+  return stack->size==stack->capacity;
+}
+
+bool isempty(Stack *stack)
+{
+  return stack->size==0;
+}
+
+void push(Stack *stack, int item)
+{
+  stack->p[stack->size]=item;
+  stack->size++;
+}
+
+void pop(Stack *stack,int *item)
+{
+  stack->size--;
+  *item= stack->p[stack->size];
+}
+
+int peek(Stack *stack)
+{
+  return stack->p[stack->size-1];
+}
+int main()
+{
+  
+  Stack *stack=create_stack(4);
+  push(stack,1);
+  push(stack,2);
+  push(stack,3);
+  push(stack,4);
+  printf("%d \n",peek(stack));
+  int a;
+  pop(stack,&a);
+  printf("%d\n",a);
+  printf("%d \n",peek(stack));
+  pop(stack,&a);
+  printf("%d\n",a);
+  
+  return 0;
+}
