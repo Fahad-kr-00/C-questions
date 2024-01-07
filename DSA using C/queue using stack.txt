@@ -1,0 +1,51 @@
+/**
+ * Your MyQueue struct will be instantiated and called as such:
+ * MyQueue* obj = myQueueCreate();
+ * myQueuePush(obj, x);
+ 
+ * int param_2 = myQueuePop(obj);
+ 
+ * int param_3 = myQueuePeek(obj);
+ 
+ * bool param_4 = myQueueEmpty(obj);
+ 
+ * myQueueFree(obj);
+*/
+typedef struct {
+    int data[10];
+    int head;;
+    int tail;
+} MyQueue;
+
+MyQueue* myQueueCreate() {
+    MyQueue *obj=(MyQueue*)malloc(sizeof(MyQueue));
+    obj->head=0;
+    obj->tail=0;
+    return obj;
+}
+
+void myQueuePush(MyQueue* obj, int x) {
+  
+  obj->data[obj->head++]=x;
+}
+
+int myQueuePop(MyQueue* obj) {
+  
+  return obj->data[obj->tail++];
+}
+
+int myQueuePeek(MyQueue* obj) {
+  
+  return obj->data[obj->tail];
+}
+
+bool myQueueEmpty(MyQueue* obj) {
+  
+  return obj->head==obj->tail;
+}
+
+void myQueueFree(MyQueue* obj) {
+    
+    free(obj);
+}
+

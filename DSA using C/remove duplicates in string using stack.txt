@@ -1,0 +1,87 @@
+
+typedef struct{
+    int data[1000000];
+    int top;
+}stack;
+int initilize(stack *a);
+int isempty(stack *a);
+int isfull(stack* a);
+int pop(stack *a);
+int push(stack *a,char b);
+int top(stack *a);
+char *removeDuplicates(char *s) {
+    stack a, b;
+    initilize(&b);
+    initilize(&a);
+    int i = 0;
+    int index = 0;
+    char c[1000];
+    
+    while (s[i] != '\0') {
+        if ((!isempty(&a)) && top(&a) == s[i]) {
+            pop(&a);
+        } else {
+            push(&a, s[i]);
+        }
+        i++;
+    }
+
+
+    
+    char *result = (char *)malloc((a.top + 2) * sizeof(char));
+    
+    while (!isempty(&a)) {
+        char f = top(&a);
+        pop(&a);
+        push(&b,f);
+    }
+    while(!isempty(&b))
+    {
+        char f=top(&b);
+        pop(&b);
+        result[index++] = f;
+    }
+
+    result[index] = '\0'; 
+    
+    return result;
+}
+
+int top(stack *a)
+{
+    return a->data[a->top];
+}
+int pop(stack *a)
+{   
+    if(isempty(a))
+    {
+        return 0;
+    }
+    else{
+        return a->data[a->top--];
+    }
+}
+int push(stack *a,char b)
+{
+    if(isfull(a)){
+        return 0;
+    }
+    else
+    {
+        a->data[++a->top]=b;
+        return 0;
+    }
+}
+int isfull(stack *a)
+{
+    return a->top==1000000-1;
+}
+int isempty(stack *a)
+{
+    return a->top==-1;
+}
+int initilize(stack *a)
+{   
+    a->top=-1;
+    return 0;
+}
