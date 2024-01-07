@@ -1,0 +1,15 @@
+#include <stdio.h>
+int main()
+{
+    int i=1;
+    char *p=&i;
+    if(*p)
+    {
+      printf("Little Endian");
+    }
+    else 
+    {
+      printf("Big endian");
+    }
+    return 0;
+}
